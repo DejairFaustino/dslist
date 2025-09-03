@@ -138,5 +138,10 @@ public class Game {
             return Objects.equals(id, other.id);
         }
 
+    public Long getName() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getName'");
+    }
+
 
 }
