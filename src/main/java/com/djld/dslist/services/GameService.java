@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.djld.dslist.dto.GameDTO;
 import com.djld.dslist.dto.GameMinDTO;
 import com.djld.dslist.entities.Game;
+import com.djld.dslist.projections.GameMinProjection;
 import com.djld.dslist.repositories.GameRepository;
 
 @Service //registrando/Injetando essa classe como sendo um componente do sistema no frameword Spring
@@ -30,6 +31,17 @@ public class GameService {
     @Transactional(readOnly = true)
     public List<GameMinDTO> findAll() {
         List<Game> result = gameRepository.findAll();
+        /*Forma padrão de carregar o resultado inserida apenas para fins didáticos
+        List<GameMinDTO> dto = result.stream().map(x -> new GameMinDTO(x)).toList();
+        return dto;*/
+        //FORMA SIMPLES DE REALIZA A MESMA CHAMADA
+        return result.stream().map(x -> new GameMinDTO(x)).toList();
+
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> findByList(Long listId) {
+        List<GameMinProjection> result = gameRepository.searchByList(listId);
         /*Forma padrão de carregar o resultado inserida apenas para fins didáticos
         List<GameMinDTO> dto = result.stream().map(x -> new GameMinDTO(x)).toList();
         return dto;*/
